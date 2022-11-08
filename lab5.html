@@ -69,12 +69,37 @@
                 z-index: 1;
                 border: 2px solid #888;
             }
+            .menu {
+                height: 15px;
+                width: 100px;
+                overflow: hidden;
+                cursor: pointer;
+                transition: 1s;
+                border: 2px solid #333333;
+            }
+            .menu:hover {
+                height: 100px;
+                overflow: hidden;
+                width: 100px;
+                transition: 1s;
+                border: 2px solid #777;
+            }
+            .o:hover {
+                background-color: #e2d2bf;
+            }
         </style>
     </head>
     <body>
         <div class="header">
                 Екатерина Щетникова,
                 Дарья Гордиенко
+        </div>
+        <div style="height: 70px;">
+        <div class ="menu">
+            <div class="o">Каталог</div>
+            <div class="o">Товары</div>
+            <div class="o">Картинки</div>
+            <div class="o">Новости</div>
         </div>
         <div class="content">
             <h1>Inline</h1>
