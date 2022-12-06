@@ -12,6 +12,11 @@ body {
         line-height: 80px;
         padding-left: 30px;
     }
+    .header .language {
+        position: absolute;
+        right: 30px;
+        top: 0px;
+    }
     .footer {
         background-color: #333;
         color:#888;
