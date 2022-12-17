@@ -131,5 +131,4 @@ function Load() {
     makeStairs () ;
     makeSnezhki ();
     Stikh();
-    
 }
