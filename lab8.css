@@ -31,3 +31,10 @@ body {
         right: 0;
         left: 0;
     }
+    .time {
+        color: #333;
+        font-size: 20px;
+        text-align: center;
+        padding-top: 100 px;
+        font-style: italic;
+    }
