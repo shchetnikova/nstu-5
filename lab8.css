@@ -33,8 +33,34 @@ body {
     }
     .time {
         color: #333;
-        font-size: 20px;
+        font-size: 28px;
         text-align: center;
-        padding-top: 100 px;
+        padding-top: 100px;
         font-style: italic;
+    }
+    .data {
+        font-style: italic;
+        font-size: 28px;
+        border: 3px solid rgb(124, 40, 219);
+        height: 150px;
+        width: 200px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .result {
+        font-size: 60px;
+        text-align: center;
+        font-style: italic;
+        background-color: rgb(210, 131, 255);
+        color: rgb(224, 197, 236)
+    }
+
+    .result2 {
+        font-size: 60px;
+        text-align: center;
+        font-style: italic;
+        background-color: rgb(90, 75, 109);
+        color: white
     }
