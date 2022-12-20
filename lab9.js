@@ -46,6 +46,11 @@ function showCoords(event) {
     }
 }
 
+function showFocus(tag) {
+    tag.style.color = "blue" 
+}
+
+
 window.addEventListener('DOMContentLoaded', function(){
     let coords = document.querySelector('#coords');
     coords.addEventListener('mousemove', showCoords);
