@@ -6,15 +6,29 @@ function clickMe(button){
 }
 
 function clickHere(button){
-    if(button.innerHTML == 'Имя')
-        button.innerHTML = 'Фамилия';
+    if(button.innerHTML == 'Катя')
+        button.innerHTML = 'Щетникова';
     else
-        button.innerHTML = 'Имя';
+        button.innerHTML = 'Катя';
 }
 
 function click1(button){
-    if(button.innerHTML == 'Имя')
-        button.innerHTML = 'Фамилия';
+    if(button.innerHTML == 'Даша')
+        button.innerHTML = 'Гордиенко';
     else
-        button.innerHTML = 'Имя';
+        button.innerHTML = 'Даша';
+}
+
+function clickMe2(button){
+    if(button.innerHTML == 'Нажми меня')
+    button.innerHTML = 'Ещё раз нажми';
+    else 
+    if(button.innerHTML == 'Ещё раз нажми')
+    button.innerHTML = 'Ещё';
+    else 
+    if(button.innerHTML == 'Ещё')
+    button.innerHTML = 'Начать сначала';
+    else
+    if(button.innerHTML == 'Начать сначала')
+    button.innerHTML = 'Нажми меня';
 }
