@@ -32,3 +32,21 @@ function clickMe2(button){
     if(button.innerHTML == 'Начать сначала')
     button.innerHTML = 'Нажми меня';
 }
+
+function showCoords(event) {
+    event.target.innerHTML = 'x = ' + event.offsetX + ', y = ' + event.offsetY;
+    if (event.ctrlKey) {
+        alert('Нажат Ctrl');
+    }
+    if (event.shiftKey) {
+        alert('Нажат Shift')
+    }
+    if (event.altKey) {
+        alert('Нажат Alt')
+    }
+}
+
+window.addEventListener('DOMContentLoaded', function(){
+    let coords = document.querySelector('#coords');
+    coords.addEventListener('mousemove', showCoords);
+});
