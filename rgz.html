@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script > 
+
+    function testScoreFunction() {
+      let score = 0;
+      for (var i = 0; i < window.answers.length; i++) {
+        if (window.answers[i] === window.currentTest[i].get("answer")) {
+          score++;
+        }
+      }
+      return score;
+    }
+
+    // Глобальные данные с параметрами пользователя, тестами на странице, текущими ответами и т.п.  
+    var userName = "";
+    var answers = [];
+    var currentQuestion = 0;
+    var currentTest = [];
+    var test1 = [];
+    
+  test1.push(new Map());
+  test1[0].set('question', 'Какую массу принимают за единицу массы в атомной физике?');
+  test1[0].set('variants', ['1/16 долю массы атома кислорода', 'массу атома кислорода', '1/12 долю массы атома углерода', 'массу одного нейтрона']);
+  test1[0].set('answer', '1/12 долю массы атома углерода');
+
+  test1.push(new Map());
+  test1[1].set('question', 'Какие вещества называются изотопами?');
+  test1[1].set('variants', ['вещества, имеющие одинаковые массы, у которых атомные веса выражаются целыми числами', 
+                            'вещества, располагающиеся в одной строке в таблице Менделеева', 
+                            'вещества, обладающие одинаковыми химическими свойствами и имеющие различные порядковые номера', 
+                            'вещества, имеющие одни и те же порядковые номера в таблице Менделеева, но различные массовые числа']);
+  test1[1].set('answer', 'вещества, имеющие одни и те же порядковые номера в таблице Менделеева, но различные массовые числа');
+
+  test1.push(new Map());
+  test1[2].set('question', 'Перемещением называют:');
+  test1[2].set('variants', ['линию в пространстве, описываемую точкой при движении', 
+                            'вектор, соединяющий начальное и конечное положение точки', 
+                            'длину пути', 
+                            'вектор, соединяющий начало координат и конечную точку пути']);
+  test1[2].set('answer', 'вектор, соединяющий начальное и конечное положение точки');
+  
+  test1.push(new Map());
+  test1[3].set('question', 'Первый закон Ньютона имеет следующую формулировку:');
+  test1[3].set('variants', ['существуют такие системы отсчета, в которых свободные тела движутся прямолинейно и равномерно', 
+                            'сила есть произведение массы на ускорение', 
+                            'силы в природе возникают симметричными парами']);
+  test1[3].set('answer', 'существуют такие системы отсчета, в которых свободные тела движутся прямолинейно и равномерно');
+
+  test1.push(new Map());
+  test1[4].set('question', 'Второй закон Ньютона имеет следующую формулировку:');
+  test1[4].set('variants', ['существуют такие системы отсчета, в которых свободные тела движутся прямолинейно и равномерно', 
+                            'сила есть произведение массы на ускорение', 
+                            'силы в природе возникают симметричными парами',
+                            'ускорение, с которым движется тело, под воздействием силы, прямо пропорционально ускорению и обратно пропорционально массе']);
+  test1[4].set('answer', 'сила есть произведение массы на ускорение');
+
+  test1.push(new Map());
+  test1[5].set('question', 'Третий закон Ньютона имеет следующую формулировку:');
+  test1[5].set('variants', ['существуют такие системы отсчета, в которых свободные тела движутся прямолинейно и равномерно', 
+                            'сила есть произведение массы на ускорение', 
+                            'два тела взаимодействуют друг на друга с силами, равными по модулю, но противоположными по направлению',
+                            'ускорение, с которым движется тело, под воздействием силы, прямо пропорционально ускорению и обратно пропорционально массе']);
+  test1[5].set('answer', 'два тела взаимодействуют друг на друга с силами, равными по модулю, но противоположными по направлению');
+
+
+  test1.push(new Map());
+  test1[6].set('question', 'Стальной шарик это…');
+  test1[6].set('variants', ['физическое тело', 
+                            'физическая величина', 
+                            'физическое явление']);
+  test1[6].set('answer', 'физическое тело');
+
+  test1.push(new Map());
+  test1[7].set('question', 'Найдите из указанных скоростей наибольшую…');
+  test1[7].set('variants', ['1 м/с', 
+                            '100 см/с', 
+                            '100 см/мин',
+                            '100 дм/с']);
+  test1[7].set('answer', '100 дм/с');
+
+  test1.push(new Map());
+  test1[8].set('question', 'Диффузия это…');
+  test1[8].set('variants', ['физическое тело', 
+                            'физическая величина', 
+                            'физическое явление']);
+  test1[8].set('answer', 'физическое явление');
+
+  test1.push(new Map());
+  test1[9].set('question', 'Имеет ли электрический заряд электрон и протон?');
+  test1[9].set('variants', ['электрон да, протон нет', 
+                            'оба не имеют зарядов', 
+                            'электрон нет, протон да',
+                            'нет правильного ответа']);
+  test1[9].set('answer', 'нет правильного ответа');
+
+
+  test1.push(new Map());
+  test1[10].set('question', 'Молекула — это');
+  test1[10].set('variants', ['наименьшая частица',
+                            'частица, состоящая из атомов',
+                            '+наименьшая устойчивая частица вещества,обладающая его основными химическими свойствами', 
+                            'наименьшая устойчивая частица вещества']);
+  test1[10].set('answer', 'нет правильного ответа');
+
+
+  test1.push(new Map());
+  test1[11].set('question', 'Число Авогадро — это');
+  test1[11].set('variants', ['число молекул в одном моле вещества', 
+                            'число молекул в одном килограмме вещества', 
+                            'число молекул в одном метре кубическом',
+                            'затрудняюсь ответить']);
+  test1[11].set('answer', 'число молекул в одном моле вещества');
+
+  test1.push(new Map());
+  test1[12].set('question', 'Переведите температуру 30 градусов по шкале Цельсия в температуру по шкале Кельвина…');
+  test1[12].set('variants', ['200К',
+                            '143',
+                            '-300',
+                            '203']);
+  test1[12].set('answer', '203');
+
+  test1.push(new Map());
+  test1[13].set('question', 'Броуновское движение — это…');
+  test1[13].set('variants', ['тепловое движение взвешенных в жидкости или газе частиц', 
+                            'любое движение молекул', 
+                            'движение молекул в жидкости',
+                            'взаимодействие молекул в результате чего они двигаются беспорядочно']);
+  test1[13].set('answer', 'тепловое движение взвешенных в жидкости или газе частиц');
+
+  test1.push(new Map());
+  test1[14].set('question', 'Идеальный газ — это…');
+  test1[14].set('variants', ['любой газ,если его рассматривать в молекулярной физике',
+                            'все легчайшие газы из известных в настоящее время',
+                            'физическая модель газа,взаимодействие между молекулами которого пренебрежимо мало',
+                            'реальный газ, изучаемый в физике или химии']);
+  test1[14].set('answer', 'физическая модель газа,взаимодействие между молекулами которого пренебрежимо мало');
+
+  test1.push(new Map());
+  test1[15].set('question', 'Как определяется температура тела?');
+  test1[15].set('variants', ['на ощупь, рукой',
+                            'термометром',
+                            'специальным оборудованием']);
+  test1[15].set('answer', 'термометром');
+
+  test1.push(new Map());
+  test1[16].set('question', 'За ноль градусов, по шкале Цельсия, принята температура…');
+  test1[16].set('variants', ['таяния льда', 
+                            'замерзания ртути', 
+                            'кипения воды',
+                            'любая условная температура']);
+  test1[16].set('answer', 'таяния льда');
+
+  test1.push(new Map());
+  test1[17].set('question', 'Влажность это…');
+  test1[17].set('variants', ['сырость в помещении',
+                            'содержание водянного пара в воздухе',
+                            'состояние погоды после дождя',
+                            'состояние, когда наблюдается образование капелек воды']);
+  test1[17].set('answer', 'содержание водянного пара в воздухе');
+
+  test1.push(new Map());
+  test1[18].set('question', 'Какое давление имеет 1 кг азота в объёме 1 куб.метр при температуре 27С? Атомный вес азота 14.');
+  test1[18].set('variants', ['0,88 Па',
+                            '8,8 Па',
+                            '88 Па',
+                            'правильного ответа нет']);
+  test1[18].set('answer', '0,88 Па');
+
+  test1.push(new Map());
+  test1[19].set('question', 'Газ сжат изотермически от объёма V1 = 8 л. до объёма V2 = 6 л. Разность давлений при этом возросла на 4 кПа. Каким было начальное давление Р1?');
+  test1[19].set('variants', ['10 кПа',
+                            '12кПа',
+                            '20 кПА',
+                            '24 кПа']);
+  test1[19].set('answer', '12кПа');
+
+  function runTest(test) {
+    console.log("test is running.");
+    window.currentTest = test;
+    window.currentQuestion = 0;
+    openInputForm();
+  };
+
+  // Функция перемешивания массива. Необходима для перемешивания вариантов ответа в тесте.
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  // Функция открытия формы для ввода имени пользователя.
+  function openInputForm() {
+    console.log("openInputForm called.");
+    console.log(document.getElementsByClassName('input-name-form-div')[0].style.visibility = "visible");
+  };
+  
+  // Функция подтверждения ввода имени пользователем.
+  function clickAcceptInputName() {
+    console.log("clickAcceptInputName called.");
+    window.userName = document.getElementById('name').value;
+    console.log(document.getElementsByClassName('input-name-form-div')[0].style.visibility = "hidden");
+    console.log(window.userName);
+    if (window.userName != "") {
+      runCurrentTest();
+    } else {
+      alert("Введите имя, это обязательное поле.");
+    }
+    return userName;
+  };
+  function runResultAnimation() {
+    if (testScoreFunction() >= window.currentTest.length) {
+      document.getElementById("result-div").style.backgroundImage = "url('happy.jpg')";
+    } else {
+      document.getElementById("result-div").style.backgroundImage = "url('sad.jpeg')";
+    }
+  }
+
+  function closeTest() {
+    // Скрытие окна с блюром при прохождении теста.
+    mainQuestionDiv = document.getElementById('test-question-div');
+    mainQuestionDiv.style.visibility = 'hidden';
+    document.getElementById("result-div").remove();
+    
+    window.currentQuestion = 0;
+    window.currentTest = null;
+    window.answers = [];
+  }
+
+  function restartTest() {
+    window.currentQuestion = 0;
+    document.getElementById("result-div").remove();
+    window.answers = [];
+    runCurrentTest();
+  }
+
+  function returnCurrentTestResult() {
+    // удаление окна с вопросами.
+    document.getElementById('test-current-question-div').remove();
+    mainQuestionDiv = document.getElementById('test-question-div');
+    
+    const resultDiv = document.createElement("div");
+    resultDiv.setAttribute("id", "result-div");
+    resultDiv.setAttribute("class", "result-div");
+
+    const buttonCloseTest = document.createElement("input");
+    buttonCloseTest.setAttribute("type", "button");
+    buttonCloseTest.setAttribute("onclick", "closeTest()");
+    buttonCloseTest.setAttribute("id", "close-test-button");
+    buttonCloseTest.setAttribute("value", "Закрыть тест");
+
+    const buttonRestartTest = document.createElement("input");
+    buttonRestartTest.setAttribute("type", "button");
+    buttonRestartTest.setAttribute("onclick", "restartTest()");
+    buttonRestartTest.setAttribute("id", "restart-test-button");
+    buttonRestartTest.setAttribute("value", "Начать заново");
+
+
+    const resultP = document.createElement("p");
+    resultP.setAttribute("id", "result-p")
+    resultP.innerHTML = window.userName + ", Ваш результат: " + testScoreFunction().toString() + " б. из " + window.currentTest.length.toString();
+    resultDiv.appendChild(buttonCloseTest);
+    resultDiv.appendChild(buttonRestartTest);
+    resultDiv.appendChild(resultP);
+    mainQuestionDiv.appendChild(resultDiv);
+
+    console.log(window.userName + ", ваш результат:" + window.answers.toString());
+    runResultAnimation();
+  }
+
+  function getNextQuestion() {    
+    if (window.currentQuestion >= window.currentTest.length) {
+      returnCurrentTestResult();
+      return;
+    }
+    document.getElementById('test-current-question-div').style.animation = 'slidein 1s linear';
+        
+    let currTestQuest = window.currentTest[window.currentQuestion];
+
+    document.getElementById("curr-question-pr").innerHTML = currTestQuest.get('question');
+
+    let variants = currTestQuest.get("variants");
+    shuffle(variants);
+
+    for (var i = 0; i < variants.length; i++) {
+      // изменение значения варианта у кнопки и лейбла.
+      document.getElementById("variant" + i.toString()).setAttribute("value", variants[i].toString());
+      document.getElementById("variant-" + i.toString() + "-label").innerHTML = variants[i].toString();
+    }
+    window.currentQuestion++;
+    
+  }
+
+
+  function runCurrentTest() {
+    let currTestQuest = window.currentTest[window.currentQuestion];
+    // Наложение blur окна при тестировании.
+    mainQuestionDiv = document.getElementById('test-question-div');
+    mainQuestionDiv.style.visibility = 'visible';
+
+    // Построение div дерева с вопросом и вариантами ответа.
+    const currQuestionDiv = document.createElement("div");
+    currQuestionDiv.setAttribute("class", "test-current-question-div");
+    currQuestionDiv.setAttribute("id", "test-current-question-div");
+
+    const currQuestion = document.createElement("p");
+    currQuestion.setAttribute("id", "curr-question-pr");
+    currQuestion.innerHTML = currTestQuest.get("question");
+    currQuestionDiv.appendChild(currQuestion);
+
+    let variants = currTestQuest.get("variants");
+    shuffle(variants);
+
+    for (var i = 0; i < variants.length; i++) {      
+      const variantInput = document.createElement("input");
+      variantInput.setAttribute("type", "radio");
+      variantInput.setAttribute("name", "variants");
+      variantInput.setAttribute("id", "variant" + i.toString());
+      variantInput.setAttribute("value", variants[i].toString());
+
+      currQuestionDiv.appendChild(variantInput);
+
+      const variantLabel = document.createElement("label");
+      variantLabel.setAttribute("id", "variant-" + i.toString() + "-label")
+      variantLabel.setAttribute("for", "variant" + i.toString());
+      variantLabel.innerHTML = variants[i].toString();
+
+      currQuestionDiv.appendChild(variantLabel);
+      currQuestionDiv.appendChild(document.createElement("br"));
+    }
+    // Построение кнопки ответа.
+    const acceptAnswerButton = document.createElement("input");
+    acceptAnswerButton.setAttribute("type", "button");
+    acceptAnswerButton.setAttribute("onclick", "clickAcceptAnswer()");
+    acceptAnswerButton.setAttribute("value", "Ответить");
+
+    currQuestionDiv.appendChild(acceptAnswerButton);
+
+    mainQuestionDiv.appendChild(currQuestionDiv);
+    window.currentQuestion++;
+  }
+
+  function clickAcceptAnswer() {
+    answer = "";
+    for (i = 0; i < document.getElementsByTagName('input').length; i++) {
+      if (document.getElementsByTagName('input')[i].getAttribute('type') === 'radio') {
+        if (document.getElementsByTagName('input')[i].checked) {
+          answer = document.getElementsByTagName('input')[i].value.toString();
+        }
+      }
+    }
+    if (answer === "") {
+      alert("Пожалуйста, ответьте на вопрос.");
+      return;
+    }
+    console.log(answer);
+    window.answers.push(answer);
+
+    mainQuestionDiv = document.getElementById('test-question-div');
+
+    let origin = document.getElementById("test-current-question-div");
+    let copy = origin.cloneNode(true);
+
+    copy.style.animation = "slideout 1s linear";
+    mainQuestionDiv.appendChild(copy);
+    origin.remove();
+    // Асинхронно выполняем генерацию нового вопроса. Позволяем анимации затухания отрисоваться.
+    setTimeout(getNextQuestion, 1000);
+  };
+
+    </script>
+
+<title>Tests online</title>
+  </head>
+  <body>
+    <nav class="navbar">
+       <!-- div со страницами сайта. -->
+      <div class="container nav-container">
+        
+        <div class="nav-div" id="img-nav">
+          <a href="rgz.html">Главная</a>            
+        </div>
+        
+        <div  class="nav-div" id="img-nav">
+          <a href="about.html">О нас</a>      
+        </div>
+        
+        <div class="nav-div" id="img-nav">
+          <a href="contacts.html">Контакты</a>      
+        </div>
+      
+      </div>
+    </nav>
+
+    <!-- div с сеткой, содержащей тесты. -->
+    <div class="tests-grid">
+
+      <div class="tests-grid-element" onclick="runTest(test1)">Физика. Тест </div>
+      <div class="tests-grid-element"></div>
+      <div class="tests-grid-element"></div>      
+      <div class="tests-grid-element"> </div>
+
+      <div class="tests-grid-element"></div>
+      <div class="tests-grid-element"></div>      
+      <div class="tests-grid-element"> </div>
+      <div class="tests-grid-element"></div>
+
+      <div class="tests-grid-element"></div>      
+      <div class="tests-grid-element"> </div>
+      <div class="tests-grid-element"></div>
+      <div class="tests-grid-element"></div>      
+
+      <div class="tests-grid-element"></div>
+      <div class="tests-grid-element"></div>      
+      <div class="tests-grid-element"> </div>
+      <div class="tests-grid-element"></div>
+
+      <div class="tests-grid-element"></div>      
+      <div class="tests-grid-element"> </div>
+      <div class="tests-grid-element"></div>
+      <div class="tests-grid-element"></div>      
+
+    </div>
+
+    <!--div для blur окна с тестовыми вопросами.-->
+    <div class="test-question-div" id="test-question-div">
+
+
+    </div>
+    
+    <!-- div для формы ввода имени пользователя. -->
+    <div class="input-name-form-div">
+      <form class="input-name-form">
+        <label for="name">Имя:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <input type="button" value="Ок" onclick="clickAcceptInputName()">
+      </form>
+    </div>
+  <footer>
+    Факультет бизнеса, ФБИ-02, 3 курс, 2022
+  </footer>
+  </body>
+</html>
