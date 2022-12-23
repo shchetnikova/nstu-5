@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="gallery.css">
+    <script > 
+    var showingIndex = 0;
+    var playStopState = 0;
+  srcs = ['odissey.jpg', 
+          'ship.jpg', 
+          '41.jpg', 
+          'angel.jpg',
+          'axe.jpg', 
+          'BB.jpg', 
+          'dinner.jpg', 
+          'Ikar.jpg',
+          'just.jpg', 
+          'port.jpg',
+          'amnesia.jpg',
+          'angel2.jpg',
+          'arc.jpg',
+          'bus.jpg',
+          'cigaretted.jpg',
+          'legend.jpg',
+          'portret.jpg',
+          'street.jpg',
+          'untitled.jpg',
+          'whitehorse.jpg']
+      var imgsLimit = srcs.length;
+
+  function runShow(i) {
+    window.showingIndex = i;
+    backDiv = document.getElementById("background-screen-div");
+    backDiv.style.visibility = "visible";
+
+    let img = document.getElementById("img-" + i.toString());
+    imgCopy = img.cloneNode(true);
+    imgCopy.setAttribute("id", "showing-img");
+    document.getElementById("showing-img-div").appendChild(imgCopy);
+    imgCopy.style.animation = "open-img-animation 2s linear";
+    document.getElementById("showing-img-div").style.transform = "scale(2, 2)";
+  }
+
+  function showNext() {
+    showDiv = document.getElementById("showing-img-div");
+    showDiv.removeChild(document.getElementById("showing-img"));
+    window.showingIndex = (window.showingIndex + 1) % window.srcs.length;
+    runShow(window.showingIndex);
+  }
+
+  function showPrev() {
+    showDiv = document.getElementById("showing-img-div");
+    showDiv.removeChild(document.getElementById("showing-img"));
+    window.showingIndex = Math.abs(window.showingIndex - 1) % window.srcs.length;
+    runShow(window.showingIndex);
+  }
+
+  function stopShow() {
+    showDiv = document.getElementById("showing-img-div");
+    showDiv.removeChild(document.getElementById("showing-img"));
+    window.showingIndex = 0;
+    document.getElementById("background-screen-div").style.visibility = "hidden";
+    window.playStopState = 0;
+  }
+
+  function playSlideShow() {
+    if (window.playStopState) {
+      showNext();
+      setTimeout(playSlideShow, 3000);
+    }
+  }
+
+  function changePlayStopSlideShow() {
+    window.playStopState++;
+    window.playStopState %= 2;
+    if (window.playStopState) {
+      playSlideShow();
+    }
+  }
+
+  window.onload = function main() {
+    const backDiv = document.createElement("div");
+    backDiv.setAttribute("id", "background-screen-div");
+    changePlayStopSlideShow = changePlayStopSlideShow;
+    const exitImg = document.createElement("img");
+    exitImg.setAttribute("src", "exit.png");
+    exitImg.setAttribute("id", "exit-button");
+    exitImg.setAttribute("class", "ui-button");
+    exitImg.setAttribute("onclick", "stopShow()");
+    backDiv.appendChild(exitImg);
+
+    const leftArrowImg = document.createElement("img");
+    leftArrowImg.setAttribute("src", "arrow_left.png");
+    leftArrowImg.setAttribute("id", "arrow-left-button");
+    leftArrowImg.setAttribute("class", "ui-button");
+    leftArrowImg.setAttribute("onclick", "showPrev()");
+    backDiv.appendChild(leftArrowImg);
+
+    const rightArrowImg = document.createElement("img");
+    rightArrowImg.setAttribute("src", "arrow_right.png");
+    rightArrowImg.setAttribute("id", "arrow-right-button");
+    rightArrowImg.setAttribute("class", "ui-button");
+    rightArrowImg.setAttribute("onclick", "showNext()");
+    backDiv.appendChild(rightArrowImg);
+
+    const playStopImg = document.createElement("img");
+    playStopImg.setAttribute("src", "play_stop1.png");
+    playStopImg.setAttribute("id", "play-stop-button");
+    playStopImg.setAttribute("class", "ui-button");
+    playStopImg.setAttribute("onclick", "changePlayStopSlideShow()");
+    backDiv.appendChild(playStopImg);
+
+    const showDiv = document.createElement("div");
+    showDiv.setAttribute("id", "showing-img-div");
+    backDiv.appendChild(showDiv);
+
+    document.body.appendChild(backDiv);
+
+    for (var i = 0; i < srcs.length; i++) {
+      const imgDiv = document.createElement("div");
+      imgDiv.setAttribute("class", "grid-content-div");
+      imgDiv.setAttribute("id", "grid-content-div-#" + i.toString());
+      // set onclick for div with param i - index of picture to start showing.
+      imgDiv.setAttribute("onclick", "runShow(" + i.toString() + ")");
+
+      const img = document.createElement("img");
+      img.setAttribute("id", "img-" + i.toString());
+      img.setAttribute("src", srcs[i]);
+
+      imgDiv.appendChild(img);
+      document.getElementById("grid-container-div").appendChild(imgDiv);
+    }
+  }
+
+  </script>
+
+<title>LookAtMe</title>
+  </head>
+  <body>
+    <div id="main-div">
+      <div id="grid-container-div">
+      </div>
+    </div>
+
+  <footer>
+    Факультет бизнеса, ФБИ-02, 3 курс, 2022
+  </footer>
+  </body>
+</html>
